@@ -9,27 +9,32 @@ mixin AudioProducer {
 }
 
 class AudioOutput {
-  Timer? _productionTimer;
+  bool _isProducing = false;
 
   Future<void> initialize({
-    Duration bufferDuration = const Duration(milliseconds: 50),
+    Duration bufferDuration = const Duration(milliseconds: 20),
   }) {
     return AudioOutputPlatform.instance.initialize(bufferDuration);
   }
 
-  void startProduction(
-    AudioProducer producer, {
-    Duration refreshRate = const Duration(milliseconds: 5),
-  }) {
-    _productionTimer?.cancel();
+  void startProduction(AudioProducer producer) async {
+    if (_isProducing) {
+      throw StateError('Audio is already being produced');
+    }
 
-    _productionTimer = Timer.periodic(refreshRate, (_) async {
-      AudioOutputPlatform.instance.produceAudio(producer: producer);
-    });
+    _isProducing = true;
+
+    while (_isProducing) {
+      await AudioOutputPlatform.instance.produceAudio(producer: producer);
+    }
+  }
+
+  void stopProduction() {
+    _isProducing = false;
   }
 
   Future<void> dispose() async {
-    _productionTimer?.cancel();
+    stopProduction();
 
     await AudioOutputPlatform.instance.dispose();
   }

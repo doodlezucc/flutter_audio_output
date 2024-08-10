@@ -49,7 +49,9 @@ class MethodChannelAudioOutput extends AudioOutputPlatform {
   @override
   Future<void> produceAudio({required AudioProducer producer}) async {
     final buffer = await requestContext();
-    producer.produce(buffer);
-    await write(buffer);
+    if (buffer.length > 0) {
+      producer.produce(buffer);
+      await write(buffer);
+    }
   }
 }

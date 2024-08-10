@@ -5,7 +5,12 @@
 #include <Audioclient.h>
 #include <comdef.h>
 
-#define CHECK_HR(hr) if (FAILED(hr)) { std::cerr << "Error at line " << __LINE__ << ": " << _com_error(hr).ErrorMessage() << std::endl; return -1; }
+void PrintHResultError(HRESULT hr) {
+	auto err = _com_error(hr);
+	std::cerr << "Error in audio_writer.cpp, line " << __LINE__ << ": " << err.ErrorMessage() << " (" << err.Description() << ")" << std::endl;
+}
+
+#define CHECK_HR(hr) if (FAILED(hr)) { PrintHResultError(hr); return -1; }
 
 enum class OutputFormatType {
 	FLOAT,
@@ -84,17 +89,16 @@ namespace audio_output {
 		return 0;
 	}
 
-	AudioWritingContext AudioWriter::RequestWritingContext()
+	int AudioWriter::RequestWritingContext(AudioWritingContext** context)
 	{
 		UINT32 numFramesPadding;
 
-		// TODO: Handle HR FAILED
-		audioClient->GetCurrentPadding(&numFramesPadding);
+		CHECK_HR(audioClient->GetCurrentPadding(&numFramesPadding));
 
 		UINT32 numFramesAvailable = bufferSizeInFrames - numFramesPadding;
 
-		auto context = AudioWritingContext(this, numFramesAvailable, waveFormat->nChannels, waveFormat->nSamplesPerSec);
-		return context;
+		*context = new AudioWritingContext(this, numFramesAvailable, waveFormat->nChannels, waveFormat->nSamplesPerSec);
+		return 0;
 	}
 
 	int AudioWriter::Write(const float* sampleData, const UINT32 length)

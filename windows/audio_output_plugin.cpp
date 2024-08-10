@@ -65,13 +65,17 @@ namespace audio_output {
 			return result->Success();
 		}
 		else if (method_name.compare("requestContext") == 0) {
-			auto writingContext = audioWriter.RequestWritingContext();
-			availableSampleLength = writingContext.availableLength;
+			AudioWritingContext* writingContext;
+			if (audioWriter.RequestWritingContext(&writingContext) < 0) {
+				return result->Error("AudioOutputError", "Failed to request writing context");
+			}
+
+			availableSampleLength = writingContext->availableLength;
 
 			auto response = EncodableMap({
 				{EncodableValue("length"), EncodableValue(availableSampleLength)},
-				{EncodableValue("sampleRate"), EncodableValue(writingContext.sampleRate)},
-				{EncodableValue("channelCount"), EncodableValue(writingContext.channelCount)},
+				{EncodableValue("sampleRate"), EncodableValue(writingContext->sampleRate)},
+				{EncodableValue("channelCount"), EncodableValue(writingContext->channelCount)},
 				});
 
 			return result->Success(response);

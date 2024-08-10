@@ -21,7 +21,7 @@ namespace audio_output {
 		int Initialize(int bufferDurationMs);
 		int Dispose();
 
-		AudioWritingContext RequestWritingContext();
+		int RequestWritingContext(AudioWritingContext** context);
 		int Write(const float* sampleData, const UINT32 length);
 	};
 
