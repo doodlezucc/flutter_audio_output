@@ -6,9 +6,9 @@
 
 #include "generated_plugin_registrant.h"
 
-#include <audio_output/audio_output_plugin_c_api.h>
+#include <raw_audio/raw_audio_plugin_c_api.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
-  AudioOutputPluginCApiRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("AudioOutputPluginCApi"));
+  RawAudioPluginCApiRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("RawAudioPluginCApi"));
 }

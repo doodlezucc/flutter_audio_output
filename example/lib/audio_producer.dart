@@ -1,7 +1,6 @@
 import 'dart:math';
 
-import 'package:audio_output/audio_buffer_context.dart';
-import 'package:audio_output/audio_output.dart';
+import 'package:raw_audio/raw_audio.dart';
 
 class MyAudioProducer implements AudioProducer {
   final List<ShootSound> activeShootSounds = [];

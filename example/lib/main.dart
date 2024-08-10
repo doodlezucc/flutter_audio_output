@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:audio_output/audio_output.dart';
-import 'package:audio_output_example/audio_producer.dart';
 import 'package:flutter/material.dart';
+import 'package:raw_audio/raw_audio.dart';
+import 'package:raw_audio_example/audio_producer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,20 +16,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final _audioOutputPlugin = AudioOutput();
+  final _rawAudioPlugin = RawAudio();
   final producer = MyAudioProducer();
 
   @override
   void initState() {
     super.initState();
-    initAudioOutput();
+    initRawAudio();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initAudioOutput() async {
-    await _audioOutputPlugin.initialize();
+  Future<void> initRawAudio() async {
+    await _rawAudioPlugin.initialize();
 
-    _audioOutputPlugin.startProduction(producer);
+    _rawAudioPlugin.startProduction(producer);
   }
 
   @override

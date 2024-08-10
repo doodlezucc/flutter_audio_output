@@ -1,15 +1,15 @@
-import 'package:audio_output/audio_buffer_context.dart';
-import 'package:audio_output/audio_output.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-import 'audio_output_platform_interface.dart';
+import 'audio_buffer.dart';
+import 'plugin.dart';
+import 'raw_audio_platform_interface.dart';
 
-/// An implementation of [AudioOutputPlatform] that uses method channels.
-class MethodChannelAudioOutput extends AudioOutputPlatform {
+/// An implementation of [RawAudioPlatform] that uses method channels.
+class MethodChannelRawAudio extends RawAudioPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
-  final methodChannel = const MethodChannel('audio_output');
+  final methodChannel = const MethodChannel('raw_audio');
 
   @override
   Future<void> initialize(Duration bufferDuration) async {

@@ -1,4 +1,4 @@
-name: audio_output
+name: raw_audio
 description: "A new Flutter plugin project."
 version: 0.0.1
 
@@ -34,7 +34,7 @@ flutter:
   plugin:
     platforms:
       windows:
-        pluginClass: AudioOutputPluginCApi
+        pluginClass: RawAudioPluginCApi
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

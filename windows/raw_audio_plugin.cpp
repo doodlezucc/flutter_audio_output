@@ -1,4 +1,4 @@
-#include "audio_output_plugin.h"
+#include "raw_audio_plugin.h"
 
 // This must be included before many other Windows headers.
 #include <windows.h>
@@ -16,20 +16,20 @@
 #include "audio_writer.h"
 #include "util.h"
 
-namespace audio_output {
+namespace raw_audio {
 
 	AudioWriter audioWriter;
 	int availableSampleLength;
 
 	// static
-	void AudioOutputPlugin::RegisterWithRegistrar(
+	void RawAudioPlugin::RegisterWithRegistrar(
 		flutter::PluginRegistrarWindows* registrar) {
 		auto channel =
 			std::make_unique<flutter::MethodChannel<flutter::EncodableValue>>(
-				registrar->messenger(), "audio_output",
+				registrar->messenger(), "raw_audio",
 				&flutter::StandardMethodCodec::GetInstance());
 
-		auto plugin = std::make_unique<AudioOutputPlugin>();
+		auto plugin = std::make_unique<RawAudioPlugin>();
 
 		channel->SetMethodCallHandler(
 			[plugin_pointer = plugin.get()](const auto& call, auto result) {
@@ -39,11 +39,11 @@ namespace audio_output {
 		registrar->AddPlugin(std::move(plugin));
 	}
 
-	AudioOutputPlugin::AudioOutputPlugin() {}
+	RawAudioPlugin::RawAudioPlugin() {}
 
-	AudioOutputPlugin::~AudioOutputPlugin() {}
+	RawAudioPlugin::~RawAudioPlugin() {}
 
-	void AudioOutputPlugin::HandleMethodCall(
+	void RawAudioPlugin::HandleMethodCall(
 		const flutter::MethodCall<flutter::EncodableValue>& method_call,
 		std::unique_ptr<flutter::MethodResult<flutter::EncodableValue>> result) {
 
@@ -67,7 +67,7 @@ namespace audio_output {
 		else if (method_name.compare("requestContext") == 0) {
 			AudioWritingContext* writingContext;
 			if (audioWriter.RequestWritingContext(&writingContext) < 0) {
-				return result->Error("AudioOutputError", "Failed to request writing context");
+				return result->Error("RawAudioError", "Failed to request writing context");
 			}
 
 			availableSampleLength = writingContext->availableLength;
@@ -96,4 +96,4 @@ namespace audio_output {
 		}
 	}
 
-}  // namespace audio_output
+}  // namespace raw_audio

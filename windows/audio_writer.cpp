@@ -43,7 +43,7 @@ OutputFormatType getWaveFormatType(WAVEFORMATEX* waveFormat) {
 	return OutputFormatType::UNSUPPORTED;
 }
 
-namespace audio_output {
+namespace raw_audio {
 	int AudioWriter::Initialize(int bufferDurationMs) {
 		// Initialization of Windows "COM" componentry
 		CHECK_HR(CoInitialize(nullptr));

@@ -1,12 +1,12 @@
-import 'package:audio_output/audio_output_method_channel.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:raw_audio/src/raw_audio_method_channel.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  MethodChannelAudioOutput platform = MethodChannelAudioOutput();
-  const MethodChannel channel = MethodChannel('audio_output');
+  MethodChannelRawAudio platform = MethodChannelRawAudio();
+  const MethodChannel channel = MethodChannel('raw_audio');
 
   setUp(() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger

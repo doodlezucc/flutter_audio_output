@@ -1,24 +1,24 @@
-#ifndef FLUTTER_PLUGIN_AUDIO_OUTPUT_PLUGIN_H_
-#define FLUTTER_PLUGIN_AUDIO_OUTPUT_PLUGIN_H_
+#ifndef FLUTTER_PLUGIN_raw_audio_PLUGIN_H_
+#define FLUTTER_PLUGIN_raw_audio_PLUGIN_H_
 
 #include <flutter/method_channel.h>
 #include <flutter/plugin_registrar_windows.h>
 
 #include <memory>
 
-namespace audio_output {
+namespace raw_audio {
 
-class AudioOutputPlugin : public flutter::Plugin {
+class RawAudioPlugin : public flutter::Plugin {
  public:
   static void RegisterWithRegistrar(flutter::PluginRegistrarWindows *registrar);
 
-  AudioOutputPlugin();
+  RawAudioPlugin();
 
-  virtual ~AudioOutputPlugin();
+  virtual ~RawAudioPlugin();
 
   // Disallow copy and assign.
-  AudioOutputPlugin(const AudioOutputPlugin&) = delete;
-  AudioOutputPlugin& operator=(const AudioOutputPlugin&) = delete;
+  RawAudioPlugin(const RawAudioPlugin&) = delete;
+  RawAudioPlugin& operator=(const RawAudioPlugin&) = delete;
 
   // Called when a method is called on this plugin's channel from Dart.
   void HandleMethodCall(
@@ -26,6 +26,6 @@ class AudioOutputPlugin : public flutter::Plugin {
       std::unique_ptr<flutter::MethodResult<flutter::EncodableValue>> result);
 };
 
-}  // namespace audio_output
+}  // namespace raw_audio
 
-#endif  // FLUTTER_PLUGIN_AUDIO_OUTPUT_PLUGIN_H_
+#endif  // FLUTTER_PLUGIN_raw_audio_PLUGIN_H_

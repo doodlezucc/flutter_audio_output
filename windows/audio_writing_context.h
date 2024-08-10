@@ -1,6 +1,6 @@
 #pragma once
 
-namespace audio_output {
+namespace raw_audio {
 
 	class AudioWriter;
 	class AudioWritingContext {

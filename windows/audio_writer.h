@@ -5,7 +5,7 @@
 
 #include "audio_writing_context.h"
 
-namespace audio_output {
+namespace raw_audio {
 	class AudioWriter
 	{
 	private:

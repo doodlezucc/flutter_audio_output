@@ -3,7 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  audio_output
+  raw_audio
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

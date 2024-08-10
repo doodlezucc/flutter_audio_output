@@ -1,12 +1,12 @@
-#include "include/audio_output/audio_output_plugin_c_api.h"
+#include "include/raw_audio/raw_audio_plugin_c_api.h"
 
 #include <flutter/plugin_registrar_windows.h>
 
-#include "audio_output_plugin.h"
+#include "raw_audio_plugin.h"
 
-void AudioOutputPluginCApiRegisterWithRegistrar(
+void RawAudioPluginCApiRegisterWithRegistrar(
     FlutterDesktopPluginRegistrarRef registrar) {
-  audio_output::AudioOutputPlugin::RegisterWithRegistrar(
+  raw_audio::RawAudioPlugin::RegisterWithRegistrar(
       flutter::PluginRegistrarManager::GetInstance()
           ->GetRegistrar<flutter::PluginRegistrarWindows>(registrar));
 }

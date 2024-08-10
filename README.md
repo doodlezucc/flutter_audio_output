@@ -1,4 +1,4 @@
-# audio_output
+# raw_audio
 
 A new Flutter plugin project.
 

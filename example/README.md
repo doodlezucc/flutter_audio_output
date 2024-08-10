@@ -1,6 +1,6 @@
-# audio_output_example
+# raw_audio_example
 
-Demonstrates how to use the audio_output plugin.
+Demonstrates how to use the raw_audio plugin.
 
 ## Getting Started
 

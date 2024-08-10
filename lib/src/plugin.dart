@@ -1,20 +1,19 @@
 import 'dart:async';
 
-import 'package:audio_output/audio_buffer_context.dart';
-
-import 'audio_output_platform_interface.dart';
+import 'audio_buffer.dart';
+import 'raw_audio_platform_interface.dart';
 
 mixin AudioProducer {
   void produce(AudioBuffer buffer);
 }
 
-class AudioOutput {
+class RawAudio {
   bool _isProducing = false;
 
   Future<void> initialize({
     Duration bufferDuration = const Duration(milliseconds: 20),
   }) {
-    return AudioOutputPlatform.instance.initialize(bufferDuration);
+    return RawAudioPlatform.instance.initialize(bufferDuration);
   }
 
   void startProduction(AudioProducer producer) async {
@@ -25,7 +24,7 @@ class AudioOutput {
     _isProducing = true;
 
     while (_isProducing) {
-      await AudioOutputPlatform.instance.produceAudio(producer: producer);
+      await RawAudioPlatform.instance.produceAudio(producer: producer);
     }
   }
 
@@ -36,6 +35,6 @@ class AudioOutput {
   Future<void> dispose() async {
     stopProduction();
 
-    await AudioOutputPlatform.instance.dispose();
+    await RawAudioPlatform.instance.dispose();
   }
 }

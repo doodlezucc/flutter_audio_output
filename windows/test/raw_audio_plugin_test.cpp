@@ -8,9 +8,9 @@
 #include <string>
 #include <variant>
 
-#include "audio_output_plugin.h"
+#include "raw_audio_plugin.h"
 
-namespace audio_output {
+namespace raw_audio {
 namespace test {
 
 namespace {
@@ -22,8 +22,8 @@ using flutter::MethodResultFunctions;
 
 }  // namespace
 
-TEST(AudioOutputPlugin, GetPlatformVersion) {
-  AudioOutputPlugin plugin;
+TEST(RawAudioPlugin, GetPlatformVersion) {
+  RawAudioPlugin plugin;
   // Save the reply value from the success callback.
   std::string result_string;
   plugin.HandleMethodCall(
@@ -40,4 +40,4 @@ TEST(AudioOutputPlugin, GetPlatformVersion) {
 }
 
 }  // namespace test
-}  // namespace audio_output
+}  // namespace raw_audio
